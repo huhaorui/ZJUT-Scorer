@@ -1,4 +1,4 @@
-import sys
+import socket
 
 import requests
 import json
@@ -24,8 +24,10 @@ def sendmail(msg, config):
         SMTPObj.login(mail_user, mail_pass)
         SMTPObj.sendmail(sender, receivers, message.as_string())
         print("邮件发送成功")
-    except BufferError:
-        print("Error: 无法发送邮件")
+    except smtplib.SMTPAuthenticationError:
+        print("邮箱账号或密码错误")
+    except socket.gaierror:
+        print("网络连接错误，请检查SMTP服务器配置")
 
 
 if __name__ == '__main__':
