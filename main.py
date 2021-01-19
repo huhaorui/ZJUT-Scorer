@@ -108,11 +108,13 @@ if __name__ == '__main__':
                 msg = msg + "当前GPA：\t" + str(GPA)
                 sendmail(msg, config)
                 size = len(decodedJSON["msg"])
-            time.sleep(60)
         except requests.exceptions.ConnectionError as e:
             print('Network Error')
         except KeyError as e:
             print('KeyError')
         except json.decoder.JSONDecodeError as e:
             print('JsonDecodeError')
-
+        except Exception as e:
+            print('error')
+        finally:
+            time.sleep(60)
